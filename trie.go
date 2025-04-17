@@ -189,9 +189,6 @@ func (t *Trie) SearchAll(search string) []string {
 // Search will return all complete words in the trie that have the search string as a prefix,
 // taking into account the Trie's settings for normalisation, fuzzy matching and levenshtein distance scheme.
 func (t *Trie) Search(search string, limit int) []string {
-	if len(search) == 0 {
-		return []string{}
-	}
 	if t.normalised {
 		transformer := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
 		var err error
