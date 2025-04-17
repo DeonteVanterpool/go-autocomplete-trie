@@ -140,6 +140,40 @@ func TestEmptySearchAll(t *testing.T) {
 	assert.ElementsMatch(t, actual, []string{"hello", "world", "supercalafrigalisticexpialidocious"})
 }
 
+func TestSearchAll(t *testing.T) {
+	table := []struct {
+		name     string
+		trie     *Trie
+		dict     []string
+		search   string
+		expected []string
+	}{
+		{
+			name:   "Valid Prefix",
+			dict:   []string{"hello"},
+			trie:   New(),
+			search: "h",
+			expected: []string{
+				"hello",
+			},
+		},
+		{
+			name:     "Empty string",
+			dict:     []string{"hello", "world"},
+			trie:     New(),
+			search:   "",
+			expected: []string{"hello", "world"},
+		},
+	}
+	for _, tt := range table {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.trie.Insert(tt.dict...)
+			actual := tt.trie.SearchAll(tt.search)
+			assert.ElementsMatch(t, actual, tt.expected)
+		})
+	}
+}
+
 func BenchmarkInsert(b *testing.B) {
 	t := New()
 	b.ReportAllocs()
