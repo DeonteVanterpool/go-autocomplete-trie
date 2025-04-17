@@ -15,7 +15,6 @@ func Example() {
 	// Output:
 	// [Wednesday]
 	// [Thursday Tuesday Wednesday]
-
 }
 
 func Example_noFeatures() {
