@@ -133,6 +133,13 @@ func TestCollect(t *testing.T) {
 	}
 }
 
+func TestEmptySearchAll(t *testing.T) {
+	trie := New()
+	trie.Insert("hello", "world", "supercalafrigalisticexpialidocious")
+	actual := trie.SearchAll("")
+	assert.ElementsMatch(t, actual, []string{"hello", "world", "supercalafrigalisticexpialidocious"})
+}
+
 func BenchmarkInsert(b *testing.B) {
 	t := New()
 	b.ReportAllocs()
